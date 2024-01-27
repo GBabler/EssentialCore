@@ -6,9 +6,11 @@
     xmlns:local="clr-namespace:EssentialCore.FORMULARIOS"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="FrmCadastoCliente"
-    Width="400"
-    Height="400"
-    ResizeMode="NoResize"
+    Width="900"
+    Height="550"
+    AllowsTransparency="False"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
         <StackPanel Width="auto" HorizontalAlignment="Center">
