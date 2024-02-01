@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Data;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using EssentialCore.CLASSE;
 using EssentialCore.REPOSITORIO;
 
@@ -8,6 +11,8 @@ namespace EssentialCore.FORMULARIOS
 {
     public partial class FrmListaDeClientes : Window
     {
+        FrmCadastoCliente cadastroCliente = new FrmCadastoCliente();
+
         public FrmListaDeClientes()
         {
             InitializeComponent();
@@ -16,11 +21,8 @@ namespace EssentialCore.FORMULARIOS
 
         private void BtnInserirCliente_Click(object sender, RoutedEventArgs e)
         {
-            FrmCadastoCliente cadastroCliente = new FrmCadastoCliente();
-
             // Inscreva-se no evento ClienteCadastrado
             cadastroCliente.ClienteCadastrado += (s, args) => ExibirDados();
-
             cadastroCliente.ShowDialog();
         }
 
@@ -50,7 +52,6 @@ namespace EssentialCore.FORMULARIOS
 
         private void BtnBuscarCliente_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
                 DataTable dt = new DataTable();
@@ -58,11 +59,9 @@ namespace EssentialCore.FORMULARIOS
 
                 dt = SQLITEDAL.GetCliente(id);
                 dgClientes.ItemsSource = dt.DefaultView;
-
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -78,6 +77,57 @@ namespace EssentialCore.FORMULARIOS
             {
                 // Se não for um número, marca o evento como manipulado para evitar a entrada
                 e.Handled = true;
+            }
+        }
+
+        private void BtnAcao_Click(object sender, RoutedEventArgs e)
+        {
+            // Encontre o DataGrid pai
+            if (dgClientes.SelectedItem != null && dgClientes.SelectedItem != "")
+            {
+                // Obtenha a linha selecionada
+                try
+                {
+                    var selectedRow = (DataRowView)dgClientes.SelectedItem;
+
+                    if (selectedRow != null)
+                    {
+                        
+
+                        try
+                        {
+                            CLIENTE dgv = new CLIENTE();
+                            dgv.Id = Convert.ToInt32(selectedRow.Row["id"]);
+                            dgv.Nome = selectedRow.Row["nome"].ToString();
+                            dgv.Celular = selectedRow.Row["celular"].ToString();
+                            dgv.Endereco = selectedRow.Row["endereco"].ToString();
+                            dgv.NumEnd = selectedRow.Row["numend"].ToString();
+
+                            // Consulte o nome do cliente pelo ID
+
+                            // Exiba o nome do cliente em um MessageBox
+                            if (dgv.Id != null)
+                            {
+                                MessageBox.Show("ID: " + dgv.Id +
+                                                "\nNOME: " + dgv.Nome +
+                                                "\nCELULAR: " + dgv.Celular +
+                                                "\nENDERECO: " + dgv.Endereco + "   Num: " + dgv.NumEnd);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            else
+            {
+                MessageBox.Show("DataGrid Vazio!.");
             }
         }
     }

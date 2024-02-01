@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="IMAGEM\editar.png" />
     <None Remove="IMAGEM\img_cliente.png" />
     <None Remove="IMAGEM\reload.png" />
     <None Remove="IMAGEM\search.png" />
@@ -16,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="IMAGEM\editar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="IMAGEM\img_cliente.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

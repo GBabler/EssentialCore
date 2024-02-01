@@ -29,7 +29,7 @@ namespace EssentialCore
         }
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (nomeLogin.Text == "admin" && senhaLogin.Password == "admin123") 
+            if (nomeLogin.Text == "1" && senhaLogin.Password == "1") 
             {
                 FrmMenu menu = new FrmMenu();
                 this.Close();

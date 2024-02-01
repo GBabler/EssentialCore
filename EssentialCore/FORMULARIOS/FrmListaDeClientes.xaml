@@ -31,15 +31,6 @@
                 Click="BtnInserirCliente_Click"
                 Content="Cadastrar" />
             <Button
-                Name="BtnEditarCliente"
-                Width="100"
-                Height="50"
-                Margin="10"
-                BorderThickness="2"
-                Click="BtnEditarCliente_Click"
-                Content="Editar Cliente" />
-
-            <Button
                 Name="BtnExcluirCliente"
                 Width="100"
                 Height="50"
@@ -86,10 +77,64 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <DataGrid
-                x:Name="dgClientes"
-                Width="500"
-                Height="auto" />
+            <ScrollViewer MaxHeight="350">
+                <DataGrid
+                    x:Name="dgClientes"
+                    Width="850"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <!--  Coluna ID  -->
+                        <DataGridTextColumn
+                            Width="50"
+                            Binding="{Binding id}"
+                            Header="ID" />
+                        <!--  Coluna Nome  -->
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding nome}"
+                            Header="NOME" />
+                        <!--  Coluna Endereço  -->
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding endereco}"
+                            Header="ENDERECO" />
+                        <!--  Coluna Número  -->
+                        <DataGridTextColumn
+                            Width="75"
+                            Binding="{Binding numend}"
+                            Header="NUMERO" />
+                        <!--  Coluna Celular  -->
+                        <DataGridTextColumn
+                            Width="100"
+                            Binding="{Binding celular}"
+                            Header="CELULAR" />
+                        <!--  Coluna Ações  -->
+                        <DataGridTemplateColumn Width="60" Header="AÇOES">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button
+                                        Width="auto"
+                                        Height="25"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Click="BtnAcao_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image
+                                                Width="25"
+                                                Height="25"
+                                                Source="\IMAGEM\editar.png" />
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </ScrollViewer>
+
+
+
         </StackPanel>
     </Grid>
 </Window>
