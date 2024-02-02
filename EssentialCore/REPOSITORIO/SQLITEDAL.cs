@@ -96,6 +96,26 @@ namespace EssentialCore.REPOSITORIO
             }
         }
 
+        public static DataTable GetClienteNome(string nome)
+        {
+            SQLiteDataAdapter da = null;
+            DataTable dt = new DataTable();
+            try
+            {
+                using (var cmd = DbConnection().CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM CLIENTE WHERE nome like '%" + nome + "%'";
+                    da = new SQLiteDataAdapter(cmd.CommandText, DbConnection());
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public static void Add(CLIENTE cliente)
         {
             try

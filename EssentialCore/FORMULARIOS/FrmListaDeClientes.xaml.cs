@@ -25,7 +25,22 @@ namespace EssentialCore.FORMULARIOS
         {
             // Inscreva-se no evento ClienteCadastrado
             cadastroCliente.ClienteCadastrado += (s, args) => ExibirDados();
-            cadastroCliente.ShowDialog();
+
+            if (cadastroCliente != null && cadastroCliente.IsVisible)
+            {
+                cadastroCliente.Focus();
+            }
+            else
+            {
+                // Se não estiver aberta, crie uma nova instância
+                cadastroCliente = new FrmCadastoCliente();
+                cadastroCliente.ClienteCadastrado += (s, args) => ExibirDados();
+
+                // Use ShowDialog() para bloquear a janela principal
+                cadastroCliente.ShowDialog();
+            }
+
+
         }
 
         private void ExibirDados()
@@ -44,7 +59,9 @@ namespace EssentialCore.FORMULARIOS
         private void BtnRecarregarForm_Click(object sender, RoutedEventArgs e)
         {
             // Recarrega os dados
+            txtId.Text = "";
             ExibirDados();
+
         }
 
         private void BtnEditarCliente_Click(object sender, RoutedEventArgs e)
@@ -58,17 +75,27 @@ namespace EssentialCore.FORMULARIOS
             {
                 DataTable dt = new DataTable();
 
-                if (int.TryParse(txtId.Text, out int id))
-                {
-                    dt = SQLITEDAL.GetCliente(id);
-                    dgClientes.ItemsSource = dt.DefaultView;
-                }
-                else
-                {
-                    ExibirDados();
-                }
+                var testeando = OpcaoBuscaCliente.Text.ToString();
 
-
+                    if (OpcaoBuscaCliente.Text.ToString() == "Id")
+                    {
+                        if (int.TryParse(txtId.Text, out int id))
+                        {
+                            dt = SQLITEDAL.GetCliente(id);
+                            dgClientes.ItemsSource = dt.DefaultView;
+                        }
+                        else
+                        {
+                            ExibirDados();
+                        }
+                    }
+                    else if (OpcaoBuscaCliente.Text.ToString() == "Nome")
+                    {
+                        // Lógica para buscar por Nome
+                        string nome = txtId.Text;
+                        dt = SQLITEDAL.GetClienteNome(nome);
+                        dgClientes.ItemsSource = dt.DefaultView;
+                    }
 
             }
             catch (Exception)
@@ -84,11 +111,16 @@ namespace EssentialCore.FORMULARIOS
 
         private void TextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            if (!char.IsDigit(e.Text, 0))
+
+            if (OpcaoBuscaCliente.Text.ToString() == "Id")
             {
-                // Se não for um número, marca o evento como manipulado para evitar a entrada
-                e.Handled = true;
+                if (!char.IsDigit(e.Text, 0))
+                {
+                    // Se não for um número, marca o evento como manipulado para evitar a entrada
+                    e.Handled = true;
+                }
             }
+            
         }
 
         private void BtnAcao_Click(object sender, RoutedEventArgs e)
@@ -158,5 +190,9 @@ namespace EssentialCore.FORMULARIOS
 
         }
 
+        private void txtId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

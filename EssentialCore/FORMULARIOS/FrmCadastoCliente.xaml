@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EssentialCore.FORMULARIOS"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="CADASTRO CLIENTE"
     Width="1280"
     Height="720"
@@ -12,18 +13,22 @@
     mc:Ignorable="d">
     <Grid>
         <Label
-    HorizontalAlignment="Center"
-    VerticalAlignment="Top"
-    Content="CADASTRAR CLIENTE"
-    FontSize="20" />
-        <StackPanel Width="auto" HorizontalAlignment="Center" Margin="0,40,0,0">
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="CADASTRAR CLIENTE"
+            FontSize="20" />
+        <StackPanel
+            Width="auto"
+            Margin="0,40,0,0"
+            HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Center">
-                <Label Margin="5,20,0,0" Content="Nome Completo:" />
+                <Label Margin="0,20,0,0" Content="*Nome Completo:" />
                 <TextBox
                     x:Name="nomeCompleto"
                     Width="300"
                     Height="30"
-                    Margin="5" />
+                    Margin="5"
+                    VerticalContentAlignment="Center" />
             </StackPanel>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -35,21 +40,25 @@
                         x:Name="endereco"
                         Width="250"
                         Height="30"
-                        Margin="7,5,5,5" />
+                        Margin="7,5,5,5"
+                        VerticalContentAlignment="Center" />
                     <TextBox
                         x:Name="numeroEnd"
                         Width="42"
                         Height="30"
-                        Margin="5" />
+                        Margin="5"
+                        VerticalContentAlignment="Center" />
                 </StackPanel>
             </StackPanel>
             <StackPanel>
-                <Label Margin="5,20,0,0" Content="Telefone" />
-                <TextBox
+                <Label Margin="5,20,0,0" Content="*Celular" />
+                <xctk:MaskedTextBox
                     x:Name="celular"
                     Width="300"
                     Height="30"
-                    Margin="5" />
+                    Margin="5"
+                    VerticalContentAlignment="Center"
+                    Mask="(00) 00000-0000" />
             </StackPanel>
             <StackPanel Margin="0,50,0,0" Orientation="Horizontal">
                 <Button

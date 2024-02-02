@@ -7,7 +7,6 @@
     Title="ESSENCIAL CORE"
     Width="1280"
     Height="720"
-    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
