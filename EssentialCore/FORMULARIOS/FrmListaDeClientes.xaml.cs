@@ -2,6 +2,7 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using EssentialCore.CLASSE;
@@ -12,7 +13,8 @@ namespace EssentialCore.FORMULARIOS
     public partial class FrmListaDeClientes : Window
     {
         FrmCadastoCliente cadastroCliente = new FrmCadastoCliente();
-
+        FrmCadastoCliente editarCliente = new FrmCadastoCliente();
+        int idCliente = 0;
         public FrmListaDeClientes()
         {
             InitializeComponent();
@@ -55,10 +57,19 @@ namespace EssentialCore.FORMULARIOS
             try
             {
                 DataTable dt = new DataTable();
-                int id = Convert.ToInt32(txtId.Text);
 
-                dt = SQLITEDAL.GetCliente(id);
-                dgClientes.ItemsSource = dt.DefaultView;
+                if (int.TryParse(txtId.Text, out int id))
+                {
+                    dt = SQLITEDAL.GetCliente(id);
+                    dgClientes.ItemsSource = dt.DefaultView;
+                }
+                else
+                {
+                    ExibirDados();
+                }
+
+
+
             }
             catch (Exception)
             {
@@ -92,7 +103,7 @@ namespace EssentialCore.FORMULARIOS
 
                     if (selectedRow != null)
                     {
-                        
+
 
                         try
                         {
@@ -108,10 +119,25 @@ namespace EssentialCore.FORMULARIOS
                             // Exiba o nome do cliente em um MessageBox
                             if (dgv.Id != null)
                             {
-                                MessageBox.Show("ID: " + dgv.Id +
-                                                "\nNOME: " + dgv.Nome +
-                                                "\nCELULAR: " + dgv.Celular +
-                                                "\nENDERECO: " + dgv.Endereco + "   Num: " + dgv.NumEnd);
+                                FrmEditarCliente editarCliente = new FrmEditarCliente();
+
+                                try
+                                {
+                                    editarCliente.idCliente.Content = Convert.ToInt32(dgv.Id);
+                                    editarCliente.nomeCompleto.Text = dgv.Nome;
+                                    editarCliente.celular.Text = dgv.Celular;
+                                    editarCliente.endereco.Text = dgv.Endereco;
+                                    editarCliente.numeroEnd.Text = dgv.NumEnd;
+
+
+                                    editarCliente.ClienteEditado += (s, args) => ExibirDados();
+                                    editarCliente.Show();
+                                }
+                                catch (Exception)
+                                {
+
+                                    throw;
+                                }
                             }
                         }
                         catch (Exception ex)
@@ -129,6 +155,8 @@ namespace EssentialCore.FORMULARIOS
             {
                 MessageBox.Show("DataGrid Vazio!.");
             }
+
         }
+
     }
 }

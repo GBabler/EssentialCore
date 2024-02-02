@@ -1,22 +1,33 @@
 ﻿<Window
-    x:Class="EssentialCore.FORMULARIOS.FrmCadastoCliente"
+    x:Class="EssentialCore.FORMULARIOS.FrmEditarCliente"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:EssentialCore.FORMULARIOS"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="CADASTRO CLIENTE"
+    Title="EDITAR CLIENTE"
     Width="1280"
     Height="720"
+    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
         <Label
-    HorizontalAlignment="Center"
-    VerticalAlignment="Top"
-    Content="CADASTRAR CLIENTE"
-    FontSize="20" />
-        <StackPanel Width="auto" HorizontalAlignment="Center" Margin="0,40,0,0">
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content="EDITAR CLIENTE"
+            FontSize="20" />
+        <Label
+            Name="idCliente"
+            Margin="0,25,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Content=""
+            FontSize="20" />
+        <StackPanel
+            Width="auto"
+            Margin="0,40,0,0"
+            HorizontalAlignment="Center">
             <StackPanel HorizontalAlignment="Center">
                 <Label Margin="5,20,0,0" Content="Nome Completo:" />
                 <TextBox
@@ -53,18 +64,19 @@
             </StackPanel>
             <StackPanel Margin="0,50,0,0" Orientation="Horizontal">
                 <Button
+                    Name="BtneditarCliente"
                     Width="150"
                     Height="35"
                     Margin="5"
                     Background="AliceBlue"
-                    Click="BtnRegistarCliente_Click"
-                    Content="Registrar" />
+                    Click="BtnEditarCliente_Click"
+                    Content="Editar Cliente" />
                 <Button
                     Width="150"
                     Height="35"
                     Margin="5"
                     Background="AliceBlue"
-                    Click="BtnCancelarRegistro_Click"
+                    Click="BtnCancelarEdicaoRegistro_Click"
                     Content="Voltar" />
             </StackPanel>
         </StackPanel>
